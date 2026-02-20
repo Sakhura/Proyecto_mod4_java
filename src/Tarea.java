@@ -1,4 +1,4 @@
-package SmartTask;
+package smarttask;
 
 /**
  * Clase abstracta {@code Tarea} — Lecciones 3 y 5: Sintaxis Java y POO.
@@ -52,10 +52,10 @@ public abstract class Tarea {
      * @param prioridad nivel de prioridad ("ALTA", "MEDIA" o "BAJA")
      */
     public Tarea(int id, String nombre, String prioridad) {
-        this.id        = id;
-        this.nombre    = nombre;
+        this.id         = id;
+        this.nombre     = nombre;
         // toUpperCase() normaliza la prioridad: "alta" → "ALTA"
-        this.prioridad = prioridad.toUpperCase();
+        this.prioridad  = prioridad.toUpperCase();
         this.completado = false; // toda tarea nueva empieza pendiente
     }
 
@@ -67,7 +67,7 @@ public abstract class Tarea {
      * Devuelve la etiqueta del tipo de tarea para mostrarla en consola.
      * Cada subclase define su propia etiqueta.
      *
-     * @return String con el tipo (ej: "[NORMAL]" o "[URGENTE]")
+     * @return String con el tipo (ej: "[NORMAL]  " o "[URGENTE] ")
      */
     public abstract String getEtiquetaTipo();
 
@@ -76,13 +76,13 @@ public abstract class Tarea {
     // ─────────────────────────────────────────────────────────────────────────
 
     /** @return el id de la tarea */
-    public int getId()           { return id; }
+    public int getId()            { return id; }
 
     /** @return el nombre de la tarea */
-    public String getNombre()    { return nombre; }
+    public String getNombre()     { return nombre; }
 
     /** @return la prioridad de la tarea */
-    public String getPrioridad() { return prioridad; }
+    public String getPrioridad()  { return prioridad; }
 
     /** @return {@code true} si la tarea está completada */
     public boolean isCompletado() { return completado; }
@@ -92,17 +92,17 @@ public abstract class Tarea {
     // ─────────────────────────────────────────────────────────────────────────
 
     /** @param nombre nuevo nombre de la tarea */
-    public void setNombre(String nombre)       { this.nombre    = nombre; }
+    public void setNombre(String nombre)          { this.nombre    = nombre; }
 
     /** @param prioridad nueva prioridad ("ALTA", "MEDIA" o "BAJA") */
-    public void setPrioridad(String prioridad) { this.prioridad = prioridad.toUpperCase(); }
+    public void setPrioridad(String prioridad)    { this.prioridad = prioridad.toUpperCase(); }
 
     /** @param completado {@code true} para marcar como completada */
     public void setCompletado(boolean completado) { this.completado = completado; }
 
     // ─────────────────────────────────────────────────────────────────────────
-    //  toString() — representación textual de la tarea
-    //  @Override: sobrescribe el método toString() de la clase Object de Java
+    //  toString()
+    //  @Override: sobrescribe el método toString() que hereda de Object
     // ─────────────────────────────────────────────────────────────────────────
 
     /**
@@ -113,10 +113,8 @@ public abstract class Tarea {
      */
     @Override
     public String toString() {
-        // Estado visual según si está completada o no
         String estado = completado ? "✅ Completada" : "⏳ Pendiente ";
 
-        // Emoji según prioridad — switch expression (Java 14+)
         String iconoPrioridad;
         switch (prioridad) {
             case "ALTA":  iconoPrioridad = "🔴"; break;
@@ -125,7 +123,6 @@ public abstract class Tarea {
             default:      iconoPrioridad = "⚪"; break;
         }
 
-        // String.format con %-Ns = texto alineado a la izquierda con N caracteres
         return String.format("| %-4d | %-10s | %-28s | %s %-5s | %s |",
                 id, getEtiquetaTipo(), nombre, iconoPrioridad, prioridad, estado);
     }
